@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateSupport;
 use App\Models\Support;
 use App\Services\SupportService;
+use DeepCopy\Filter\Filter;
 use Illuminate\Http\Request;
 
 class SupportController extends Controller
@@ -19,25 +20,31 @@ class SupportController extends Controller
     public function index(Request $request)
     {
         $supports = $this->service->paginate(
-            page: $request->get('page', 1),
-            totalPerPage: $request->get('per_page', 6),
-            filter: $request->filter,
+        page: $request->get('page',1),
+        totalPerPage: $request->get('per_page',15),
+        filter: $request->filter
         );
-
-        $filters = ['filter' => $request->get('filter', '')];
+       
+ 
+    
 
         return view('admin/supports/index', compact('supports', 'filters'));
+                        
     }
+
+
 
     public function show(string $id)
     {
         // Support::find($id)
         // Support::where('id', $id)->first();
-        // Support::where('id', '!=', $id)->first();
+        // Support::where('id', '!=', $id)->first(); primeiro registro
         if (!$support = $this->service->findOne($id)) {
             return back();
         }
-
+        dd($support->subject);
+        
+        
         return view('admin/supports/show', compact('support'));
     }
 
@@ -51,10 +58,11 @@ class SupportController extends Controller
         $this->service->new(
             CreateSupportDTO::makeFromRequest($request)
         );
+        
 
         return redirect()
                 ->route('supports.index')
-                ->with('message', 'Cadastrado com sucesso!');
+                ->with('message', 'Cadastrado com sucesso!Inície');
     }
 
     public function edit(string $id)
@@ -90,4 +98,11 @@ class SupportController extends Controller
                 ->route('supports.index')
                 ->with('message', 'Deletado com sucesso!');
     }
+   
+    
 }
+# public function delete(string $id): void
+#{
+#    $this->repository->delete($id);
+#}
+?>

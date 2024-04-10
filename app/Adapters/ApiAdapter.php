@@ -18,7 +18,8 @@ class ApiAdapter
                     'is_last_page' => $data->isLastPage(),
                     'current_page' => $data->currentPage(),
                     'next_page' => $data->getNumberNextPage(),
-                    'previous_page' => $data->getNumberPreviousPage(),
+                    'previous_page' => $data->getNumberPreviousPage(),  
+                    
                 ]
             ]);
     }

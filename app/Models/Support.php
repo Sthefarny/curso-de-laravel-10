@@ -29,7 +29,7 @@ class Support extends Model
     {
         return Attribute::make(
             set: fn (SupportStatus $status) => $status->name,
-        );
+        );  
     }
 
     public function user(): BelongsTo

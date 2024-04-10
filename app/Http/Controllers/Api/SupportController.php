@@ -20,7 +20,8 @@ class SupportController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource. 
+     * 
      */
     public function index(Request $request)
     {
@@ -30,6 +31,7 @@ class SupportController extends Controller
             totalPerPage: $request->get('per_page', 1),
             filter: $request->filter,
         );
+      
 
         return ApiAdapter::toJson($supports);
     }
@@ -46,6 +48,7 @@ class SupportController extends Controller
         return (new SupportResource($support))
             ->response()
             ->setStatusCode(Response::HTTP_CREATED);;
+            
     }
 
     /**
